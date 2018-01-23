@@ -13,7 +13,6 @@ source:
 
 build:
   number: 0
-  noarch: python
   script: python -m pip install --no-deps --ignore-installed .
   entry_points:
     - anaconda = binstar_client.scripts.cli:main
@@ -21,7 +20,7 @@ build:
     - conda-server = binstar_client.scripts.cli:main
 
 requirements:
-  build:
+  host:
     - python
     - pip
 
@@ -57,6 +56,7 @@ test:
 about:
   home: https://github.com/Anaconda-Platform/anaconda-client
   license: BSD 3-Clause
+  license_family: BSD
   license_file: LICENSE.md
   summary: Anaconda Cloud command line client library
 
