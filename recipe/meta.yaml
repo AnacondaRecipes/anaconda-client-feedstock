@@ -1,6 +1,6 @@
 {% set name = "anaconda-client" %}
-{% set version = "1.6.3" %}
-{% set checksum = "e24339e172e79554c2045209c54366a39fb37f6ceeede738cde7cb324de464f3" %}
+{% set version = "1.6.7" %}
+{% set checksum = "7ee2a4d471f2506fa0ede10b4a8306fb5ef4f33f317ac20748ee49d459cd37ae" %}
 
 package:
   name: {{ name }}
@@ -26,11 +26,13 @@ requirements:
 
   run:
     - python
-    - clyent
+    - clyent >=1.2.0
     - requests >=2.9.1
-    - pyyaml
-    - python-dateutil
+    - python-dateutil >=2.6.1
     - pytz
+    - six
+    - nbformat >=4.4.0
+    - ruamel_yaml <0.15
 
 test:
   imports:
@@ -53,6 +55,7 @@ test:
 about:
   home: https://github.com/Anaconda-Platform/anaconda-client
   license: BSD 3-Clause
+  license_family: BSD
   license_file: LICENSE.md
   summary: Anaconda Cloud command line client library
 
