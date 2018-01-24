@@ -1,6 +1,6 @@
 {% set name = "anaconda-client" %}
-{% set version = "1.6.7" %}
-{% set checksum = "7ee2a4d471f2506fa0ede10b4a8306fb5ef4f33f317ac20748ee49d459cd37ae" %}
+{% set version = "1.6.8" %}
+{% set checksum = "f70ba4523f56b77312f4510842d4f6b994bffc75182ce98d73eb06f5fa8e8823" %}
 
 package:
   name: {{ name }}
@@ -23,16 +23,16 @@ requirements:
   build:
     - python
     - setuptools
-
   run:
     - python
-    - clyent >=1.2.0
-    - requests >=2.9.1
-    - python-dateutil >=2.6.1
+    - setuptools
     - pytz
     - six
     - nbformat >=4.4.0
-    - ruamel_yaml <0.15
+    - clyent >=1.2.0
+    - requests >=2.9.1
+    - ruamel_yaml  >=0.11.14
+    - python-dateutil >=2.6.1
 
 test:
   imports:
