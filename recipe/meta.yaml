@@ -1,6 +1,6 @@
 {% set name = "anaconda-client" %}
-{% set version = "1.6.8" %}
-{% set checksum = "f70ba4523f56b77312f4510842d4f6b994bffc75182ce98d73eb06f5fa8e8823" %}
+{% set version = "1.6.9" %}
+{% set checksum = "57b6b3435a7b6ab3c0feece7e9a948755f55481b2c072d1bf9b9ec56e0e7c5ba" %}
 
 package:
   name: {{ name }}
@@ -31,7 +31,7 @@ requirements:
     - nbformat >=4.4.0
     - clyent >=1.2.0
     - requests >=2.9.1
-    - ruamel_yaml  >=0.11.14
+    - pyyaml >=3.12
     - python-dateutil >=2.6.1
 
 test:
