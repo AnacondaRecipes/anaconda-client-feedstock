@@ -23,6 +23,8 @@ requirements:
   host:
     - python
     - pip
+    - wheel
+    - setuptools
 
   run:
     - python
@@ -47,8 +49,10 @@ test:
     - binstar_client.utils
     - binstar_client.utils.notebook
     - binstar_client.utils.notebook.tests
-
+  requires:
+    - pip
   commands:
+    - pip check
     - anaconda --help
     - binstar --help
     - conda-server --help
