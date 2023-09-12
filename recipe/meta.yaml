@@ -36,6 +36,7 @@ requirements:
     - pytz
     - requests >=2.9.1
     - six
+    - anaconda-anon-usage >=0.4.0
 
 test:
   imports:
