@@ -1,72 +1,66 @@
-{% set name = "anaconda-client" %}
-{% set version = "1.9.0" %}
-{% set checksum = "78f64f3b3b556f5b939f742b69d50d4046f8dc3a5414c072447386ab9cb74deb" %}
+{% set version = "1.12.0" %}
 
 package:
-  name: {{ name }}
+  name: anaconda-client
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://github.com/Anaconda-Platform/anaconda-client/archive/{{ version }}.tar.gz
-  sha256: {{ checksum }}
+  git_url: https://github.com/Anaconda-Platform/anaconda-client.git
+  git_tag: {{ version }}
 
 build:
-  number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 1
   entry_points:
     - anaconda = binstar_client.scripts.cli:main
     - binstar = binstar_client.scripts.cli:main
     - conda-server = binstar_client.scripts.cli:main
 
 requirements:
+  build:
+    - git  # [not win]
   host:
     - python
-    - pip
-    - wheel
     - setuptools
-
   run:
     - python
-    - setuptools
     - clyent >=1.2.0
+    - conda-package-handling >=1.7.3
+    - defusedxml >=0.7.1
     - nbformat >=4.4.0
-    - pyyaml >=3.12
     - python-dateutil >=2.6.1
-    - pytz
-    - requests >=2.9.1
-    - six
+    - pytz >=2021.3
+    - pyyaml >=3.12
+    - requests >=2.20.0
+    - requests-toolbelt >=0.9.1
+    - setuptools >=58.0.4
+    - six >=1.15.0
+    - tqdm >=4.56.0
+    - urllib3 >=1.26.4
 
 test:
+  requires:
+    - conda
+  commands:
+    - anaconda -h
+    - anaconda --version
   imports:
     - binstar_client
     - binstar_client.commands
     - binstar_client.inspect_package
-    - binstar_client.inspect_package.tests
     - binstar_client.mixins
     - binstar_client.scripts
-    - binstar_client.tests
     - binstar_client.utils
     - binstar_client.utils.notebook
-    - binstar_client.utils.notebook.tests
-  requires:
-    - pip
-  commands:
-    - pip check
-    - anaconda --help
-    - binstar --help
-    - conda-server --help
 
 about:
-  home: https://github.com/Anaconda-Platform/anaconda-client
-  license: BSD 3-Clause
+  home: https://anaconda.org
+  license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.md
-  summary: Anaconda Cloud command line client library
-  doc_url: https://docs.anaconda.com/anaconda-cloud/user-guide/getting-started/
+  summary: anaconda.org command line client library
+  description: |
+    Anaconda-client is used to connect to and manage your Anaconda Cloud account, upload packages you have created
+    and generate access tokens to allow access to private packages.
+  doc_url: https://docs.anaconda.org/anacondaorg/
+  doc_source_url: https://github.com/Anaconda-Platform/anaconda-client/blob/master/README.md
   dev_url: https://github.com/Anaconda-Platform/anaconda-client
-
-extra:
-  recipe-maintainers:
-    - jakirkham
-    - goanpeca
