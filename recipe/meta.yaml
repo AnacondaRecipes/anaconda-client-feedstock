@@ -1,12 +1,15 @@
+{% set name = "anaconda-client" %}
 {% set version = "1.12.0" %}
+{% set checksum = "78f64f3b3b556f5b939f742b69d50d4046f8dc3a5414c072447386ab9cb74deb" %}
 
 package:
-  name: anaconda-client
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  git_url: https://github.com/Anaconda-Platform/anaconda-client.git
-  git_tag: {{ version }}
+  fn: {{ name }}-{{ version }}.tar.gz
+  url: https://github.com/Anaconda-Platform/anaconda-client/archive/{{ version }}.tar.gz
+  sha256: {{ checksum }}
 
 build:
   number: 1
@@ -16,8 +19,6 @@ build:
     - conda-server = binstar_client.scripts.cli:main
 
 requirements:
-  build:
-    - git  # [not win]
   host:
     - python
     - setuptools
@@ -36,6 +37,7 @@ requirements:
     - six >=1.15.0
     - tqdm >=4.56.0
     - urllib3 >=1.26.4
+    - anaconda-anon-usage >=0.4.0
 
 test:
   requires:
