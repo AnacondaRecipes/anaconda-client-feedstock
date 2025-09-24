@@ -9,7 +9,8 @@ source:
   sha256: 96990e99d9c13e67e88c5a943936ae3596dcf6c4676175569e1b0aac3980cb12
 
 build:
-  number: 0
+  number: 1
+  noarch: python
   script: {{ PYTHON }} -m pip install --no-build-isolation --no-deps . -vv
   entry_points:
     - binstar = binstar_client.scripts.cli:main
