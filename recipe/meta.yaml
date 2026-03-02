@@ -10,6 +10,7 @@ source:
 
 build:
   number: 0
+  skip: true # [py<310]
   script: {{ PYTHON }} -m pip install --no-build-isolation --no-deps . -vv
   entry_points:
     - binstar = binstar_client.scripts.cli:main
@@ -18,7 +19,7 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.10
+    - python
     - hatchling
     - hatch-vcs >=0.3
     - setuptools-scm >=7.1
@@ -26,7 +27,7 @@ requirements:
   run:
     # Based on:
     # requirements.txt, conda.recipe/meta.yaml, requirements-extra.txt
-    - python >=3.10
+    - python
     - anaconda-anon-usage >=0.7.3
     - anaconda-cli-base >=0.7.0
     - anaconda-auth >=0.12.3
@@ -44,7 +45,7 @@ requirements:
     - urllib3 >=1.26.4
   run_constrained:
     - anaconda-project >=0.9.1
-    - pillow >=8.2
+    - pillow >=10.2.0
 
 test:
   imports:
