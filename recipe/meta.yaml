@@ -88,6 +88,10 @@ about:
   description: |
     Anaconda-client is used to connect to and manage your packages on anaconda.org, upload packages you have created
     and generate access tokens to allow access to private packages.
-  doc_url: https://docs.anaconda.com/anacondaorg/
-  doc_source_url: https://github.com/anaconda/anaconda-client/blob/main/README.md
+  doc_url: https://www.anaconda.com/docs/tools/anaconda-org
   dev_url: https://github.com/anaconda/anaconda-client
+
+extra:
+  skip-lints:
+    - python_build_tools_in_host
+    - python_build_tool_in_run
