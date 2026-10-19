@@ -1,4 +1,4 @@
-{% set version = "1.15.0" %}
+{% set version = "1.16.0" %}
 
 package:
   name: anaconda-client
@@ -6,11 +6,10 @@ package:
 
 source:
   url: https://github.com/anaconda/anaconda-client/archive/{{ version }}.tar.gz
-  sha256: 65f6c135ab0528df2d66153f93f16beee721fb3d1ab5f88e1a869905d4b796dc
+  sha256: 3abb6246aae258dde2cf06a72959ab6fe18385261c1e1b931f4208b6f6fb531e
 
 build:
   number: 0
-  skip: true # [py<310]
   script: {{ PYTHON }} -m pip install --no-build-isolation --no-deps . -vv
   entry_points:
     - binstar = binstar_client.scripts.cli:main
