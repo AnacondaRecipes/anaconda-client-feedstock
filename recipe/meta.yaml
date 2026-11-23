@@ -1,16 +1,17 @@
-{% set version = "1.16.0" %}
+{% set name = "anaconda-client" %}
+{% set version = "1.17.0" %}
 
 package:
-  name: anaconda-client
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/anaconda/anaconda-client/archive/{{ version }}.tar.gz
-  sha256: 3abb6246aae258dde2cf06a72959ab6fe18385261c1e1b931f4208b6f6fb531e
+  url: https://github.com/anaconda/{{ name }}/archive/{{ version }}.tar.gz
+  sha256: b0a3ee3e346d5798dedd12d2300fa6b1099a258ea28beea1fa02f6901f85ff14
 
 build:
   number: 0
-  skip: true # [py<310]
+  skip: true  # [py<310]
   script: {{ PYTHON }} -m pip install --no-build-isolation --no-deps . -vv
   entry_points:
     - binstar = binstar_client.scripts.cli:main
@@ -33,11 +34,12 @@ requirements:
     - anaconda-auth >=0.12.3
     - anaconda-opentelemetry >=1.2.2
     # click 8.5.0 deprecates click.utils.get_binary_stream, which typer<0.26.0 still imports
-    - click <8.5.0
+    - click ==8.4.1
     - conda-package-handling >=1.7.3
     - conda-package-streaming >=0.9.0
     - defusedxml >=0.7.1
     - nbformat >=4.4.0
+    # imported directly in binstar_client/inspect_package/pypi.py
     - packaging
     - platformdirs >=3.10.0,<5.0
     - python-dateutil >=2.6.1
@@ -47,10 +49,11 @@ requirements:
     - requests-toolbelt >=0.9.1
     - setuptools >=58.0.4
     - tqdm >=4.56.0
-    # unpinned typer pulls in click 8.5.0 which we don't want
-    - typer <0.27
+    # Typer 0.26 no longer accepts Click parameter types used by config --set
+    - typer >=0.17,<0.26
     - urllib3 >=1.26.4
   run_constrained:
+    # pillow from [full] extra; [dev] extra omitted (dev-only)
     - anaconda-project >=0.9.1
     - pillow >=10.2.0
 
@@ -97,6 +100,8 @@ test:
     - anaconda -h
     - anaconda -V
     - anaconda org --help
+    - binstar --help
+    - conda-server --help
     - python -c "import binstar_client; print(f'binstar_client.__version__ is {binstar_client.__version__}')"
     - python -c "import binstar_client; assert binstar_client.__version__ == \"{{ version }}\""
     - pytest -vv {{ ignore_tests }} -k "not ({{ tests_to_skip }})" tests
